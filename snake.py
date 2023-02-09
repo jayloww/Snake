@@ -13,7 +13,7 @@ clock = pygame.time.Clock()
 fps = 10
 
 snake = Snake(x=25, y=25, w=25, h=25, color=(255, 255, 255))
-fruit = Fruit(w=25, h=25, color=(255, 255, 255))
+fruit = Fruit(w=25, h=25, color=(149, 42, 163), screen_h=h, screen_w=w)
 game = Game(w=w, h=h, snake=snake, fruit=fruit)
 
 active = True

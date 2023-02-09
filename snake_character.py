@@ -43,13 +43,17 @@ class Snake:
         for event in events:
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
-                    self.direction = Direction.West
+                    if self.direction != Direction.East:
+                        self.direction = Direction.West
                 if event.key == pygame.K_RIGHT:
-                    self.direction = Direction.East
+                    if self.direction != Direction.West:
+                        self.direction = Direction.East
                 if event.key == pygame.K_UP:
-                    self.direction = Direction.North
+                    if self.direction != Direction.South:
+                        self.direction = Direction.North
                 if event.key == pygame.K_DOWN:
-                    self.direction = Direction.South
+                    if self.direction != Direction.North:
+                        self.direction = Direction.South
         self.move()
 
 

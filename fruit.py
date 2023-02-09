@@ -1,19 +1,21 @@
 import pygame
 import random
-
-
 class Fruit:
-    def __init__(self, w, h, color):
+    def __init__(self, w, h, color, screen_w, screen_h):
         self.w = w
         self.h = h
         self.color = color
-        self.fruit_list = []
+        self.just_ate = False
+        self.screen_w = screen_w
+        self.screen_h = screen_h
+        self.x = 25 * random.randint(1, self.screen_h // 25)
+        self.y = 25 * random.randint(1, self.screen_w // 25)
 
-    def draw(self, screen, screen_w, screen_h):
-        if not self.fruit_list:
-            x = 25 * random.randint(1, screen_h//25)
-            y = 25 * random.randint(1, screen_w//25)
-            self.fruit_list.append(x)
-            self.fruit_list.append(y)
-        pygame.draw.rect(screen, self.color, pygame.Rect(self.fruit_list[0], self.fruit_list[1], self.w, self.h))
+    def draw(self, screen):
+        if self.just_ate:
+            self.x = 25 * random.randint(1, self.screen_h // 25+1)
+            self.y = 25 * random.randint(1, self.screen_w // 25+1)
+            self.just_ate = False
+            print(self.x, self.y)
+        pygame.draw.rect(screen, self.color, pygame.Rect(self.x, self.y, self.w, self.h))
 
