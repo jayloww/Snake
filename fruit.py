@@ -16,6 +16,5 @@ class Fruit:
             self.x = 25 * random.randint(1, self.screen_w // 25-1)
             self.y = 25 * random.randint(1, self.screen_h // 25-1)
             self.just_ate = False
-            print(self.x, self.y)
         pygame.draw.rect(screen, self.color, pygame.Rect(self.x, self.y, self.w, self.h))
 
