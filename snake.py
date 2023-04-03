@@ -1,9 +1,10 @@
 import pygame
-from game import Game
+from game import Game, CELL_SIZE
 from snake_character import Snake
 from fruit import Fruit
 
-w, h = 640, 400
+grid_w, grid_h = 25, 16
+w, h = grid_w * CELL_SIZE, grid_h * CELL_SIZE
 
 pygame.init()
 screen = pygame.display.set_mode((w, h))
@@ -11,10 +12,9 @@ pygame.display.set_caption("Snake")
 
 clock = pygame.time.Clock()
 fps = 10
-
-snake = Snake(x=25, y=25, w=25, h=25, color=(255, 255, 255))
-fruit = Fruit(w=25, h=25, color=(149, 42, 163), screen_h=h, screen_w=w)
-game = Game(w=w, h=h, snake=snake, fruit=fruit)
+snake = Snake(x=1, y=1, color=(255, 255, 255))
+fruit = Fruit(color=(149, 42, 163), grid_h=grid_h, grid_w=grid_w)
+game = Game(snake=snake, fruit=fruit)
 
 active = True
 while active:
@@ -24,6 +24,5 @@ while active:
             active = False
 
     clock.tick(fps)
-
     game.update(events)
     game.draw(screen)

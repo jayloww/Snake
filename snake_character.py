@@ -1,5 +1,6 @@
 import pygame
 from enum import Enum
+from game import CELL_SIZE
 
 
 class Direction(Enum):
@@ -10,29 +11,27 @@ class Direction(Enum):
 
 
 class Snake:
-    def __init__(self, x, y, w, h, color):
+    def __init__(self, x, y, color):
         self.x = x
         self.y = y
-        self.w = w
-        self.h = h
         self.color = color
-        self.rect_list = [(self.x, self.y), (self.x - self.w, self.y), (self.x - 2 * self.w, self.y),
-                          (self.x - 3 * self.w, self.y)]
+        self.rect_list = [(self.x, self.y), (self.x - CELL_SIZE, self.y), (self.x - 2 * CELL_SIZE, self.y),
+                          (self.x - 3 * CELL_SIZE, self.y)]
         self.just_ate = False
         self.direction = Direction.East
 
     def move(self):
         if self.direction == Direction.West:
-            self.x -= 25
+            self.x -= 1
             self.rect_list.insert(0, (self.x, self.y))
         elif self.direction == Direction.East:
-            self.x += 25
+            self.x += 1
             self.rect_list.insert(0, (self.x, self.y))
         elif self.direction == Direction.North:
-            self.y -= 25
+            self.y -= 1
             self.rect_list.insert(0, (self.x, self.y))
         elif self.direction == Direction.South:
-            self.y += 25
+            self.y += 1
             self.rect_list.insert(0, (self.x, self.y))
         if self.just_ate:
             self.just_ate = False
@@ -56,10 +55,9 @@ class Snake:
                         self.direction = Direction.South
         self.move()
 
-
     def draw(self, screen):
-        for rectangle in self.rect_list:
-            pygame.draw.rect(screen, self.color, pygame.Rect(*rectangle, self.w, self.h))
+        for x, y in self.rect_list:
+            pygame.draw.rect(screen, self.color, pygame.Rect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE))
 
     def __repr__(self):
-        return f"Snake = (x={self.x}, y={self.y}, w ={self.w}, h={self.h}, color={self.color})"
+        return f"Snake = (x={self.x}, y={self.y}, color={self.color})"

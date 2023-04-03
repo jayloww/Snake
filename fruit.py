@@ -1,20 +1,23 @@
 import pygame
 import random
+from game import CELL_SIZE
+
+
 class Fruit:
-    def __init__(self, w, h, color, screen_w, screen_h):
-        self.w = w
-        self.h = h
+    def __init__(self, color, grid_w, grid_h):
         self.color = color
-        self.just_ate = False
-        self.screen_w = screen_w
-        self.screen_h = screen_h
-        self.x = 25 * random.randint(1, self.screen_w // 25-1)
-        self.y = 25 * random.randint(1, self.screen_h // 25-1)
+        self.grid_w = grid_w
+        self.grid_h = grid_h
+        self.x = random.randrange(1, self.grid_w)
+        self.y = random.randrange(1, self.grid_h)
+
+    def randomize(self, snake_body):
+        while True:
+            self.x = random.randrange(1, self.grid_w)
+            self.y = random.randrange(1, self.grid_h)
+            if (self.x, self.y) not in snake_body:
+                break
 
     def draw(self, screen):
-        if self.just_ate:
-            self.x = 25 * random.randint(1, self.screen_w // 25-1)
-            self.y = 25 * random.randint(1, self.screen_h // 25-1)
-            self.just_ate = False
-        pygame.draw.rect(screen, self.color, pygame.Rect(self.x, self.y, self.w, self.h))
-
+        pygame.draw.rect(screen, self.color,
+                         rect=pygame.Rect((CELL_SIZE * self.x, CELL_SIZE * self.y, CELL_SIZE, CELL_SIZE)))
