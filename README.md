@@ -18,5 +18,5 @@ pip install pygame
 To run the game
 
 ````
-python ./snake.py
+python ./main.py
 ````
