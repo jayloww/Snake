@@ -11,9 +11,11 @@ class Direction(Enum):
 
 
 class Snake:
-    def __init__(self, x, y, color):
+    def __init__(self, grid_w, grid_h, x, y, color):
         self.x = x
         self.y = y
+        self.grid_h = grid_h
+        self.grid_w = grid_w
         self.color = color
         self.rect_list = [(self.x, self.y), (self.x - CELL_SIZE, self.y), (self.x - 2, self.y),
                           (self.x - 3, self.y)]
@@ -68,7 +70,8 @@ class Snake:
         return self.rect_list[0] in self.rect_list[1:]
 
     def check_collide_walls(self) -> bool:
-        return 0 > self.rect_list[0][0] < 25 or 0 > self.rect_list[0][1] < 16
+        return 0 > self.rect_list[0][0] or self.rect_list[0][0] >= self.grid_w or 0 > self.rect_list[0][1] or \
+            self.rect_list[0][1] >= self.grid_h
 
     def __repr__(self):
         return f"Snake = (x={self.x}, y={self.y}, color={self.color})"

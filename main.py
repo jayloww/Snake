@@ -12,7 +12,7 @@ pygame.display.set_caption("Snake")
 
 clock = pygame.time.Clock()
 fps = 10
-snake = Snake(x=1, y=1, color=(255, 255, 255))
+snake = Snake(grid_w=grid_w, grid_h=grid_h, x=1, y=1, color=(255, 255, 255))
 fruit = Fruit(color=(149, 42, 163), grid_h=grid_h, grid_w=grid_w)
 game = Game(screen_w=w, screen_h=h, snake=snake, fruit=fruit)
 
