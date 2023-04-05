@@ -15,8 +15,9 @@ class Snake:
         self.x = x
         self.y = y
         self.color = color
-        self.rect_list = [(self.x, self.y), (self.x - CELL_SIZE, self.y), (self.x - 2 * CELL_SIZE, self.y),
-                          (self.x - 3 * CELL_SIZE, self.y)]
+        self.rect_list = [(self.x, self.y), (self.x - CELL_SIZE, self.y), (self.x - 2, self.y),
+                          (self.x - 3, self.y)]
+
         self.just_ate = False
         self.direction = Direction.East
 
@@ -58,6 +59,16 @@ class Snake:
     def draw(self, screen):
         for x, y in self.rect_list:
             pygame.draw.rect(screen, self.color, pygame.Rect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE))
+        print(self.x, self.y)
+
+    def check_collide(self) -> bool:
+        return self.check_collide_walls() or self.check_self_collide()
+
+    def check_self_collide(self) -> bool:
+        return self.rect_list[0] in self.rect_list[1:]
+
+    def check_collide_walls(self) -> bool:
+        return 0 > self.rect_list[0][0] < 25 or 0 > self.rect_list[0][1] < 16
 
     def __repr__(self):
         return f"Snake = (x={self.x}, y={self.y}, color={self.color})"
