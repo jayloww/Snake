@@ -1,6 +1,6 @@
 import pygame
 from enum import Enum
-from game import CELL_SIZE
+from constants import CELL_SIZE
 
 
 class Direction(Enum):
@@ -61,7 +61,6 @@ class Snake:
     def draw(self, screen):
         for x, y in self.rect_list:
             pygame.draw.rect(screen, self.color, pygame.Rect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE))
-        print(self.x, self.y)
 
     def check_collide(self) -> bool:
         return self.check_collide_walls() or self.check_self_collide()

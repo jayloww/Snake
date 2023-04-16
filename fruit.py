@@ -1,6 +1,6 @@
 import pygame
 import random
-from game import CELL_SIZE
+from constants import CELL_SIZE
 
 
 class Fruit:
