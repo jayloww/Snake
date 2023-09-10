@@ -3,7 +3,7 @@ import pygame
 from enum import Enum
 from snake import Snake
 from fruit import Fruit
-from constants import CELL_SIZE
+from constants import CELL_SIZE, SCREEN_SIZE
 
 
 class GameState(Enum):
@@ -31,14 +31,13 @@ class Game:
         self.fruit = None
         self.font = pygame.font.SysFont("Arial", 45)
         self.state = GameState.Running
-
         self.grid_w, self.grid_h = grid_w, grid_h
-        self.screen_w, self.screen_h = (grid_w * CELL_SIZE, grid_h * CELL_SIZE)
+        self.screen_w, self.screen_h = (grid_w * (CELL_SIZE), grid_h * (CELL_SIZE))
         self.reset()
 
     def reset(self):
         self.snake = Snake(grid_w=self.grid_w, grid_h=self.grid_h, x=1, y=1, color=(255, 255, 255))
-        self.fruit = Fruit(color=(149, 42, 163), grid_h=self.grid_h, grid_w=self.grid_w)
+        self.fruit = Fruit(color=(149, 42, 163), grid_h=self.grid_h, grid_w=self.grid_w, )
         self.state = GameState.Running
 
     def update(self, events):

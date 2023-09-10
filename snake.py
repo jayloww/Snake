@@ -1,6 +1,6 @@
 import pygame
 from enum import Enum
-from constants import CELL_SIZE
+from constants import CELL_SIZE, SCREEN_SIZE
 
 
 class Direction(Enum):
@@ -16,6 +16,7 @@ class Snake:
         self.y = y
         self.grid_h = grid_h
         self.grid_w = grid_w
+        self.screen_w, self.screen_h = (grid_w * CELL_SIZE, grid_h * CELL_SIZE)
         self.color = color
         self.rect_list = [(self.x, self.y), (self.x - CELL_SIZE, self.y), (self.x - 2, self.y),
                           (self.x - 3, self.y)]
